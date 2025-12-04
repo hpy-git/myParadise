@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <!--
+  Title: myTheme | MikroTik Hotspot Theme
+  Codename: Nebula
+  Version: 4.65
+  Repository: https://github.com/hpy-git/myTheme
+  Author: HPY | hpy-git
+  -->
+<head>
+<title id="title"></title>
+$(if refresh-timeout)
+<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+$(endif)
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5b7cfa" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="css/resort-theme.css">
+<script defer src="js/browser-detect.js"></script>
+<script defer src="js/theme.js"></script>
+<script language="javaScript">
+
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+	if (window.focus) popup.focus();
+    }
+    function openAdvert() {
+	popup = open('$(link-advert)', 'hotspot_advert', '');
+	setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+	if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+	window.close();
+	return false;
+    }
+
+</script>
+</head>
+<body $(if advert-pending == 'yes')	onLoad="openAdvert()" $(endif)>
+  <div class="resort-bg"></div>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="sun-icon" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </button>
+
+  <div class="main-wrapper">
+    <div class="glass-panel animate-in">
+      
+      <!-- Welcome Header -->
+      <div class="text-center mb-4">
+        <div class="avatar-circle primary">
+          <svg class="icon avatar-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <h2 class="page-title">Welcome Back</h2>
+        <p class="page-subtitle">$(username)</p>
+      </div>
+
+      <!-- Toggle Button -->
+      <button class="btn btn-secondary" onclick="toggleDetails(this)" style="margin-bottom: 24px;">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+        Show Connection Details
+      </button>
+
+      <!-- Collapsible Content -->
+      <div id="connection-details" class="hidden animate-in">
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <!-- IP Address -->
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: var(--primary);"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            <div class="stat-value" style="font-family: monospace;">$(ip)</div>
+            <div class="stat-label">IP Address</div>
+          </div>
+
+          <!-- MAC Address -->
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <div class="stat-value" style="font-family: monospace;">$(mac)</div>
+            <div class="stat-label">MAC Address</div>
+          </div>
+
+          <!-- Upload -->
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: var(--accent);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            <div class="stat-value">$(bytes-in-nice)</div>
+            <div class="stat-label">Upload</div>
+          </div>
+
+          <!-- Download -->
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: var(--primary);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <div class="stat-value">$(bytes-out-nice)</div>
+            <div class="stat-label">Download</div>
+          </div>
+
+          <!-- Uptime -->
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: var(--warning);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div class="stat-value">$(uptime)</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+
+          <!-- Remaining -->
+          $(if remain-bytes-total)
+          <div class="stat-card">
+            <svg class="icon stat-icon" viewBox="0 0 24 24" style="color: #ec4899;"><path d="M4.5 3h15"/><path d="M4.5 21h15"/><path d="M6 3v18"/><path d="M18 3v18"/><path d="M6 12h12"/></svg>
+            <div class="stat-value">$(remain-bytes-total-nice)</div>
+            <div class="stat-label">Remaining</div>
+          </div>
+          $(endif)
+        </div>
+
+      </div>
+
+      <script>
+        function toggleDetails(btn) {
+          var details = document.getElementById('connection-details');
+          details.classList.toggle('hidden');
+          
+          // Update button text/icon
+          if (details.classList.contains('hidden')) {
+            btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> Show Connection Details';
+            btn.style.background = 'rgba(255, 255, 255, 0.05)';
+            btn.style.color = 'var(--text-main)';
+          } else {
+            btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Hide Details';
+            btn.style.background = 'var(--primary)';
+            btn.style.color = 'white';
+          }
+        }
+      </script>
+
+      <!-- Refresh / Status Messages -->
+      $(if refresh-timeout)
+      <div class="text-center mt-4" style="color: var(--text-muted); font-size: 12px;">
+        Auto-refresh in $(refresh-timeout)
+      </div>
+      $(endif)
+
+      <!-- Logout -->
+      <form action="$(link-logout)" name="logout" onSubmit="return openLogout()" class="mt-4">
+        $(if login-by-mac != 'yes')
+        <button class="btn btn-primary" style="background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" type="submit">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg> Logout
+        </button>
+        $(endif)
+      </form>
+
+    </div>
+  </div>
+  <script>
+      // Theme Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Check for saved theme preference or default to light mode
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      if (currentTheme === 'dark') {
+          body.classList.add('dark-theme');
+      }
+      
+      themeToggle.addEventListener('click', function() {
+          body.classList.toggle('dark-theme');
+          
+          // Save theme preference
+          const theme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+          localStorage.setItem('theme', theme);
+      });
+
+      var titleElement = document.getElementById('title');
+      if (titleElement) {
+          titleElement.innerHTML = "$(hostname) &gt; status";
+      }
+  </script>
+</body>
+</html>

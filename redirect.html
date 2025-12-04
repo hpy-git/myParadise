@@ -1,0 +1,29 @@
+$(if http-status == 302)Hotspot redirect$(endif)
+$(if http-header == "Location")$(link-redirect)$(endif)
+<!DOCTYPE html>
+<html lang="en">
+    <!--
+  Title: myTheme | MikroTik Hotspot Theme
+  Codename: Nebula
+  Version: 4.65
+  Repository: https://github.com/hpy-git/myTheme
+  Author: HPY | hpy-git
+  -->
+<head>
+<title>Redirecting...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0; url=$(link-redirect)">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="css/resort-theme.css">
+<script defer src="js/theme.js"></script>
+</head>
+<body>
+  <div class="resort-bg"></div>
+
+<!-- Theme Toggle Button Removed for Resort Theme -->
+<div style="position:fixed; top:8px; right:8px;">
+  
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <!--
+  Title: myTheme | MikroTik Hotspot Theme
+  Codename: Nebula
+  Version: 4.65
+  Repository: https://github.com/hpy-git/myTheme
+  Author: HPY | hpy-git
+  -->
+<head>
+<title id="title"></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5b7cfa" />
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="css/resort-theme.css">
+<script defer src="js/theme.js"></script>
+$(if refresh-timeout)
+<script>
+	setTimeout(function(){
+	location.href = './status';
+	},4000)
+</script>
+$(endif)
+</head>
+<body>
+  <div class="resort-bg"></div>
+
+<!-- Theme Toggle Button Removed for Resort Theme -->
+
+  <div class="main-wrapper">
+    <div class="glass-panel animate-in text-center">
+      
+      <div class="avatar-circle success">
+        <svg class="icon avatar-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+
+      $(if login-by == 'trial')
+      <h2 class="page-title">Welcome!</h2>
+      <p class="page-subtitle muted">Trial User</p>
+      $(elif login-by != 'mac')
+      <h2 class="page-title">Welcome!</h2>
+      <p class="page-subtitle">$(username)</p>
+      $(endif)
+
+      <div class="info-box">
+        <p>You are now connected to</p>
+        <p id="dname" class="highlight"></p>
+      </div>
+
+      <button class="btn btn-primary" onclick="window.location='./status'">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Check Status
+      </button>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById('title').innerHTML = window.location.hostname + " &gt; success";	
+    document.getElementById('dname').innerHTML = window.location.hostname;
+  </script>
+</body>
+</html>
